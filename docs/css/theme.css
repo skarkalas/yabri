@@ -1,0 +1,55 @@
+/* ==========================================================================
+   10. Semantic Color Classes
+   ========================================================================== */
+
+.function {
+  color: #b39ddb;
+}
+
+.object {
+  color: #ccc;
+}
+
+.date {
+  color: teal;
+}
+
+.boolean {
+  color: coral;
+}
+
+.number {
+  color: green;
+}
+
+.string {
+  color: #4682b4;
+}
+
+.undefined {
+  color: violet;
+}
+
+.error {
+  color: #d50000;
+}
+
+.syntax-error {
+  color: #dc143c;
+}
+
+.reference-error {
+  color: #c62828;
+}
+
+.eval-error {
+  color: #dc143c;
+}
+
+.range-error {
+  color: red;
+}
+
+.type-error {
+  color: maroon;
+}

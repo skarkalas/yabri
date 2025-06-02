@@ -1,0 +1,180 @@
+/* ==========================================================================
+   1. REPL Container
+   ========================================================================== */
+
+#repl-container {
+  display: flex; /* Make it a flex container */
+  flex-direction: column;
+  width: 100%; /* 80% of the viewport width */
+  height: 100%; /* 70% of the viewport height */
+  /* margin: 20px auto; Center the container on the page */
+  /* border: 1px solid #ccc; */
+  box-sizing: border-box; /* Include padding and border in width/height */
+  padding: 10px;
+  overflow-y: auto; /* Prevent content from overflowing the container */
+}
+
+/* ==========================================================================
+     2. Main Editor Area
+     ========================================================================== */
+
+#editor {
+  padding: 10px !important;
+  background-image: url(data:image/bmp;base64,Qk06AAAAAAAAADYAAAAoAAAAAQAAAAEAAAABABgAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAISEhAA==);
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Occupy the full height of its parent (#repl-container) */
+  width: 100%; /* Occupy the full width of its parent (#repl-container) */
+  box-sizing: border-box;
+  overflow-y: auto; /* Enable vertical scrolling for REPL content */
+}
+
+/* ==========================================================================
+     List Styling (ul)
+     ========================================================================== */
+
+ul {
+  margin: 3px;
+  padding-left: 1.25em; /* Spacing for the image */
+  cursor: unset;
+}
+
+ul:hover {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+/* ==========================================================================
+   List Styles and Symbols
+   ========================================================================== */
+
+.prompt,
+.output,
+.exception,
+.log,
+.warning,
+.error {
+  list-style-type: none; /* Remove the default list style */
+  padding-left: 1.25em; /* Add padding for spacing */
+  position: relative; /* Needed for absolute positioning of ::before */
+}
+
+/* ul.prompt.selected-prompt {
+  background-color: rgba(0, 128, 255, 0.05); 
+  border-left: 2px solid lightblue;
+} */
+
+.prompt::before,
+.output::before,
+.exception::before,
+.log::before,
+.warning::before,
+.error::before {
+  font-family: "Font Awesome 6 Free"; /* Use the correct Font Awesome family */
+  font-weight: 900; /* Needed for solid style */
+  font-size: unset;
+  display: inline-block;
+  position: absolute;
+  left: 3px;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-right: 0.3em; /* Add some spacing */
+  cursor: pointer; /* Apply the hand cursor */
+}
+
+.prompt::before {
+  content: "\f054";
+  color: #367cf1;
+}
+
+.output::before {
+  content: "\f053";
+  color: #f1ca47;
+}
+
+.exception::before {
+  content: "\f00d";
+  color: #f14747;
+}
+
+.log::before {
+  content: "\f100";
+  color: #f1ca47;
+}
+
+.warning::before {
+  content: "\f071";
+  color: #ca6b0f;
+}
+
+.warning {
+  background-color: #faf9d1;
+}
+
+.error::before {
+  content: "\f057";
+  color: #c83e2f;
+}
+
+.error {
+  background-color: #f8ebec;
+}
+
+.selected-output,
+.selected-prompt {
+  background-color: rgba(0, 128, 255, 0.1);
+  border: 1px solid rgb(0, 255, 34);
+}
+
+/* ==========================================================================
+   List Item Styling (li)
+   ========================================================================== */
+
+li {
+  /* word-break: break-all; */
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  position: relative;
+  left: 5px;
+}
+
+/* ==========================================================================
+   Input Styling (input)
+   ========================================================================== */
+
+input {
+  display: inline-block;
+  background: 0 0;
+  border: none;
+  outline: 0;
+  color: currentcolor;
+  caret-color: currentcolor;
+  width: 100%;
+}
+
+.prompt span {
+  display: none; /* Hide the text prompt */
+}
+
+.prompt li input,
+.output li pre,
+.exception li pre,
+.log li pre,
+.warn li pre,
+.error li pre {
+  line-height: inherit; /* Ensure consistent line height */
+  cursor: text; /* Keep the text cursor for input */
+}
+
+/* ==========================================================================
+   Preformatted Text Output (pre)
+   ========================================================================== */
+
+pre {
+  font-family: "Fira Code", Monaco, "Courier New", monospace;
+  font-size: 16px;
+  line-height: 1.5;
+  white-space: pre-wrap; /* Since you're already using this on li */
+  word-break: break-word; /* Break long words */
+  cursor: text;
+  margin: unset;
+}

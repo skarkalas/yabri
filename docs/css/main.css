@@ -1,0 +1,690 @@
+/*
+ * Main Stylesheet for WebREPL Demos and UI Components
+ * ---------------------------------------------------
+ * This file contains specific styles for demo sections,
+ * component containers, and interactive elements.
+ */
+
+/* ==========================================================================
+   0. CSS Variables for Dark Theme
+   ========================================================================== */
+:root {
+  /* General Background & Text Colors (Deep & Subtle Dark) */
+  --background-color: #242424; /* A deep charcoal grey for the main page background */
+  --text-color: #e0e0e0; /* Light grey for most body text */
+  --heading-color: #f0f0f0; /* Slightly brighter light grey for headings */
+  --subtle-text-color: #a0a0a0; /* For secondary text, like small notes or disabled states */
+
+  /* Input & Element Colors */
+  --input-bg-color: #333333; /* Darker grey for input fields and editor backgrounds */
+  --border-color: #4a4a4a; /* Medium dark grey for borders and separators */
+  --light-border-color: #666666; /* A slightly lighter border for internal dividers if needed */
+
+  /* Button & Interactive Element Colors (Teal Accent) */
+  --button-bg-color: #00796b; /* A rich, dark teal */
+  --button-text-color: #ffffff; /* White text on buttons */
+  --button-hover-bg-color: #004d40; /* A darker teal for hover states */
+
+  /* REPL-specific Colors (harmonizing with your existing REPL) */
+  --repl-bg-color: #1a1a1a; /* Even darker for the REPL's internal background */
+  --repl-text-color: #f0f0f0; /* Light text for REPL content */
+  --repl-border-color: #000000; /* Black outline for the REPL, as you have */
+
+  /* New: Specific colors for the Inject API button */
+  --inject-button-bg-color: #e6b300; /* A gold/yellowish color */
+  --inject-button-text-color: #333333; /* Dark text for better contrast on yellow */
+  --inject-button-hover-bg-color: #b38600; /* Darker shade for hover */
+
+  /* New: Specific colors for the session API button */
+  --session-button-bg-color: #e6b300; /* A gold/yellowish color */
+  --session-button-text-color: #333333; /* Dark text for better contrast on yellow */
+  --session-button-hover-bg-color: #b38600; /* Darker shade for hover */
+
+  --log-color: #5ad3c5;
+  --error-color: #f37d7d;
+  
+  /* New: Specific border colors for messages */
+  --message-success-border-color: var(
+    --log-color
+  ); /* Green border for success */
+  --message-error-border-color: var(--error-color); /* Red border for errors */
+  --message-default-border-color: var(--border-color); /* Default border */
+
+  /* NEW: Navbar & Footer Colors */
+  --header-bg-color: #993434; /* Dark gray for header */
+  --header-text-color: #ffffff; /* White text for header */
+  --footer-bg-color: #282828; /* Dark gray for footer */
+  --footer-text-color: #a0a0a0; /* Subtle text for footer */
+  --link-color: #00796b; /* Reusing button color for links, or define new */
+  --link-hover-color: #004d40; /* Reusing button hover color for links */
+}
+
+/* ==========================================================================
+   1. Global Element & Custom Component Base Styles
+   ========================================================================== */
+
+/* Basic reset/global styles */
+html {
+  scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+  height: 100%; /* Ensure html takes full viewport height */
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  line-height: 1.6;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0; /* Remove default body margin */
+  padding: 0; /* Remove default body padding */
+
+  display: flex; /* NEW: Flex container for overall layout */
+  flex-direction: column; /* NEW: Stack children (navbar, main, footer) vertically */
+  min-height: 100vh; /* NEW: Ensure body takes at least the full viewport height */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--heading-color);
+}
+
+/* Specific adjustment for the very first h1 to integrate with new layout */
+body > h1 {
+  margin-top: 0; /* Remove top margin that might push content down */
+  margin-bottom: 20px; /* Add some space below it */
+  text-align: center; /* Center the welcome message */
+}
+
+a {
+  color: var(--link-color);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--link-hover-color);
+  text-decoration: underline;
+}
+
+section {
+  padding: 40px 0; /* Padding for sections */
+  margin-bottom: 20px; /* Space between sections */
+  /* border-bottom: 1px solid var(--border-color); */
+}
+
+section:last-of-type {
+  border-bottom: none; /* No border for the last section */
+}
+
+p {
+  margin-bottom: 1em;
+}
+
+code {
+  background-color: rgba(100, 100, 100, 0.2);
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-family: "Fira Code", monospace;
+  color: var(--text-color);
+}
+
+.message-box {
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 10px;
+  border: 1px solid;
+  font-size: 0.9em;
+}
+
+/* Global styling for the WebREPL custom element */
+yabri-terminal {
+  display: block;
+  width: 100%;
+  height: 600px;
+  border: 1px solid var(--repl-border-color);
+  border-radius: 5px;
+  box-sizing: border-box;
+  background-color: var(--repl-bg-color);
+  color: var(--repl-text-color);
+}
+
+/* NEW: Style for the main content area */
+main, section#intro {
+  flex-grow: 1; /* Allows main content to take up available space, pushing footer down */
+  max-width: 90vw; /* Max width for content consistency */
+  width: 100%; /* Ensure it takes full width up to max */
+  margin: 0 auto; /* Center the content */
+  padding: 40px 20px; /* Padding for content within main */
+  box-sizing: border-box; /* Include padding in width calculation */
+}
+
+main {
+  padding-top: 0;
+}
+
+section#intro {
+  padding-bottom: 0;
+}
+
+section#intro > h1 {
+  font-size: 200%;
+}
+
+/* Remove margin for hr tags as main container padding handles spacing */
+hr {
+  margin: 0;
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+/* ==========================================================================
+   2. Layout-Specific Styles (API Injection Demo)
+   ========================================================================== */
+
+/* New container for commands (left) and instructions (right) */
+.commands-instructions-container {
+  display: flex;
+  gap: 30px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  padding: 15px;
+  background-color: var(--input-bg-color);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+/* Commands column (left) - NOW CORRECTLY 60% */
+.commands-column {
+  flex: 3; /* This makes it 60% (3 out of 5 parts) */
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.commands-column h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: var(--heading-color);
+}
+
+.commands-column p {
+  margin-top: 0;
+  margin-bottom: 0;
+  color: var(--text-color);
+}
+
+.command-btn {
+  padding: 8px 12px;
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: "Fira Code", monospace;
+  font-size: 0.9em;
+  text-align: left;
+  transition: background-color 0.2s ease-in-out;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.command-btn:hover {
+  background-color: var(--button-hover-bg-color);
+}
+
+/* Instructions column (right) - NOW CORRECTLY 40% */
+.instructions-column {
+  flex: 2; /* This makes it 40% (2 out of 5 parts) */
+  min-width: 250px; /* Adjusted min-width for the instructions column */
+  display: flex; /* Make it a flex container to stack its children */
+  flex-direction: column; /* Stack children vertically */
+  gap: 10px; /* Space between heading, paragraph, button, message */
+}
+
+/* Ensure elements within instructions-column stack properly */
+.instructions-column h3 {
+  margin-top: 12px;
+  margin-bottom: 0; /* Remove default margins to use gap */
+  color: var(--heading-color);
+}
+
+.instructions-column p {
+  margin-top: 0;
+  margin-bottom: 0; /* Remove default margins to use gap */
+  color: var(--text-color);
+}
+
+/* Styles for elements within the instructions column (now the 'controls' for the API editor) */
+.instructions-column #inject-api-btn,
+.instructions-column #remove-api-btn,
+.instructions-column #reset-session-btn {
+  margin-top: 0; /* Remove default margin as column gap handles it */
+}
+
+.instructions-column #api-editor-message,
+.instructions-column #session-editor-message {
+  margin-top: 0; /* Remove default margin as column gap handles it */
+  white-space: pre-wrap;
+}
+
+/* Adjustments for the REPL and API editor container */
+.repl-api-container {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+/* REPL column (left) - Remains 60% */
+.repl-column {
+  flex: 3; /* This makes it 60% */
+  min-width: 300px;
+}
+
+/* API editor column (right) - Remains 40%, but now only contains textarea */
+.api-editor-column {
+  flex: 2; /* This makes it 40% */
+  display: flex;
+  flex-direction: column; /* To make textarea fill available space */
+  min-width: 250px;
+}
+
+/* Textarea for the API code editor: now fills entire column */
+#api-code-editor {
+  width: 100%;
+  flex-grow: 1; /* This makes it occupy all available vertical space */
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--input-bg-color);
+  color: var(--text-color);
+  font-family: "Fira Code", monospace;
+  font-size: 0.8em;
+  line-height: 1.5;
+  resize: none;
+  box-sizing: border-box;
+}
+
+/* Specific styles for the Inject API button */
+#inject-api-btn,
+#remove-api-btn {
+  width: 100% !important; /* Force button to fill width of its flex parent */
+  padding: 12px 20px;
+  margin-top: 10px;
+  font-size: 1.1em;
+  background-color: var(--inject-button-bg-color);
+  color: var(--inject-button-text-color);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  align-self: flex-start; /* Aligns to start if parent is flex-column */
+}
+
+#inject-api-btn:hover {
+  background-color: var(--inject-button-hover-bg-color);
+}
+
+/* Specific styles for the API editor message div */
+#api-editor-message {
+  flex-grow: 1; /* Make it grow to fill remaining space */
+  min-height: 40px; /* Give it a minimum height for vertical centering */
+  margin-top: 10px;
+  font-size: 0.9em;
+  padding: 5px 10px;
+  border: 2px solid var(--message-default-border-color);
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  word-break: break-word;
+  transition: border-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+/* ==========================================================================
+   3. Specific Element Styles (Event Log)
+   ========================================================================== */
+
+/* New container for the Event Listener Demo's columns */
+.event-display-container {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+  flex-wrap: wrap; /* Allows columns to stack on smaller screens */
+}
+
+/* Left column (60%) for the REPL */
+.event-repl-column {
+  flex: 3; /* Takes 60% of available space (3 out of 5 parts) */
+  min-width: 300px; /* Minimum width before wrapping */
+}
+
+/* Right column (40%) for the event log */
+.event-log-column {
+  flex: 2; /* Takes 40% of available space (2 out of 5 parts) */
+  min-width: 250px; /* Minimum width before wrapping */
+  display: flex; /* Make it a flex container so #event-log-container can grow */
+  flex-direction: column; /* Stack its children (heading and log container) */
+  gap: 10px; /* Space between the heading and the log container */
+}
+
+/* Style for the Live Event Log heading */
+.event-log-column h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  color: var(--heading-color);
+}
+
+/* Basic styling for the event log container (NOW A TEXTAREA) */
+#event-log-container {
+  width: 100%; /* Fill the width of its parent */
+  flex-grow: 1; /* Make it fill available vertical space in flex parent */
+  resize: none; /* Disable user resizing, similar to api-code-editor */
+  box-sizing: border-box; /* Include padding and border in its width/height */
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px; /* Consistent with other inputs/textareas */
+  background-color: var(--input-bg-color);
+  color: var(--text-color);
+  font-family: monospace; /* Keep monospace for logs */
+  font-size: 0.9em;
+  line-height: 1.5; /* Improve readability */
+}
+
+/* ==========================================================================
+   4. Specific Element Styles (Session Persistence Demo)
+   ========================================================================== */
+
+/* New container for the Session Persistence Demo's columns */
+.session-display-container {
+  display: flex;
+  gap: 20px; /* Consistent spacing between columns */
+  margin-top: 20px; /* Space from the text above */
+  flex-wrap: wrap; /* Allows columns to stack on smaller screens */
+}
+
+/* Left column (60%) for the REPL */
+.session-repl-column {
+  flex: 3; /* Takes 60% of available space (3 out of 5 parts) */
+  min-width: 300px; /* Minimum width before wrapping */
+}
+
+/* Right column (40%) for the session buttons */
+.session-editor-column {
+  flex: 2; /* Takes 40% of available space (2 out of 5 parts) */
+  min-width: 200px; /* Minimum width before wrapping */
+  display: flex; /* Make it a flex container to stack its children */
+  flex-direction: column; /* Stack buttons vertically */
+  gap: 10px; /* Space between buttons */
+  justify-content: flex-start; /* Center buttons vertically within the column */
+  align-items: stretch; /* Make buttons stretch to fill column width */
+}
+
+/* Textarea for the API code editor: now fills entire column */
+#session-code-editor {
+  width: 100%;
+  flex-grow: 1; /* This makes it occupy all available vertical space */
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--input-bg-color);
+  color: var(--text-color);
+  font-family: "Fira Code", monospace;
+  font-size: 0.8em;
+  line-height: 1.5;
+  resize: none;
+  box-sizing: border-box;
+}
+
+/* Specific styles for the Inject API button */
+#reset-session-btn {
+  width: 100% !important; /* Force button to fill width of its flex parent */
+  padding: 12px 20px;
+  margin-top: 10px;
+  font-size: 1.1em;
+  background-color: var(--inject-button-bg-color);
+  color: var(--inject-button-text-color);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  align-self: flex-start; /* Aligns to start if parent is flex-column */
+}
+
+#reset-session-btn:hover {
+  background-color: var(--inject-button-hover-bg-color);
+}
+
+/* Specific styles for the session editor message div */
+#session-editor-message {
+  flex-grow: 1; /* Make it grow to fill remaining space */
+  min-height: 40px; /* Give it a minimum height for vertical centering */
+  margin-top: 10px;
+  font-size: 0.9em;
+  padding: 5px 10px;
+  border: 2px solid var(--message-default-border-color);
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  word-break: break-word;
+  transition: border-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+/* ==========================================================================
+   NEW: Navbar Styles
+   ========================================================================== */
+#main-nav {
+  background-color: var(--header-bg-color);
+  color: var(--header-text-color);
+  padding: 35px 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.nav-container {
+  max-width: 90vw; /* Match main content width */
+  margin: 0 auto;
+  padding: 0 20px; /* Horizontal padding */
+  display: flex;
+  justify-content: space-between; /* Brand on left, links on right */
+  align-items: center; /* Vertically align items */
+  flex-wrap: wrap; /* Allow nav items to wrap on small screens */
+}
+
+.nav-brand {
+  font-size: 2.5em;
+  font-weight: bold;
+  color: var(--header-text-color);
+  text-decoration: none;
+  margin-right: 20px; /* Space between brand and nav links */
+}
+
+.nav-brand {
+  font-size: 2.5em;
+  font-weight: bold;
+  color: var(--header-text-color);
+  text-decoration: none;
+  margin-right: 20px;
+  display: flex;
+  align-items: center; /* Vertically centers the items */
+  gap: 10px; /* Space between the logo and the text */
+  cursor: default; /* Change cursor from pointer to default arrow */
+  pointer-events: none;
+}
+
+.nav-logo {
+  height: 35px; /* Adjust this value as needed for your logo's desired size */
+  width: auto; /* Ensures the aspect ratio is maintained */
+  vertical-align: middle; /* Helps with alignment, though flexbox handles most of it */
+}
+
+.nav-icon-btn {
+  /* Base styles, inherited by both <a> and <button> */
+  background: none;
+  border: none;
+  color: var(--text-color); /* Inherit text color from navbar links */
+  cursor: pointer;
+  font-size: 2.25rem; /* Adjust size as needed */
+  padding: 0.5rem;
+  display: flex; /* Helps in centering the icon */
+  align-items: center; /* Vertically center icon */
+  justify-content: center; /* Horizontally center icon */
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out; /* Add transition for smoothness */
+
+  /* Ensure link-specific defaults are overridden for <a> */
+  text-decoration: none; /* Remove underline from <a> tags */
+  line-height: 1; /* Normalize line height for better vertical centering */
+}
+
+.nav-icon-btn:hover,
+.nav-icon-btn:focus {
+  color: var(--accent-color); /* Or a slightly brighter color on hover */
+  background-color: rgba(0, 0, 0, 0.1); /* Subtle background change on hover */
+  border-radius: 4px; /* Optional: slight rounded corners on hover */
+}
+
+/* Target the icon specifically if it's not inheriting correctly */
+/* This is a stronger rule to ensure the icon itself gets the hover color */
+.nav-icon-btn:hover i,
+.nav-icon-btn:focus i {
+  color: #cccccc;
+}
+
+#main-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 10px; /* Space between nav items */
+  flex-wrap: wrap; /* Allow links to wrap if necessary */
+  justify-content: flex-end; /* Align links to the right */
+  align-items: center;
+}
+
+#main-nav ul li a {
+  color: var(--header-text-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease-in-out;
+  white-space: nowrap; /* Prevent links from breaking lines */
+}
+
+#main-nav ul li a:hover {
+  color: var(--link-hover-color);
+}
+
+/* ==========================================================================
+   NEW: Footer Styles
+   ========================================================================== */
+#main-footer {
+  background-color: var(--footer-bg-color);
+  color: var(--footer-text-color);
+  padding: 20px 0;
+  text-align: center;
+  margin-top: auto; /* Pushes the footer to the bottom when using flex-direction: column on body */
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow at the top */
+}
+
+.footer-content {
+  max-width: 1200px; /* Match main content width */
+  margin: 0 auto;
+  padding: 0 20px; /* Horizontal padding */
+}
+
+#main-footer p {
+  margin: 5px 0;
+  font-size: 0.9em;
+}
+
+/* ==========================================================================
+   5. Responsive Adjustments (Updated for Navbar & Footer)
+   ========================================================================== */
+
+@media (max-width: 1240px) {
+  /* Adjusted body padding to be handled by inner containers */
+  body {
+    padding: 0; /* Remove global body padding */
+  }
+  main {
+    padding: 40px 20px; /* Ensure main content retains its padding */
+  }
+  #main-nav .nav-container,
+  #main-footer .footer-content {
+    padding: 0 20px; /* Ensure navbar and footer content retain padding */
+  }
+}
+
+@media (max-width: 768px) {
+  /* Apply flex-direction: column to all main containers */
+  .commands-instructions-container,
+  .repl-api-container,
+  .event-display-container,
+  .session-display-container {
+    flex-direction: column;
+  }
+  /* Make all columns take full width on small screens */
+  .repl-column,
+  .api-editor-column,
+  .instructions-column,
+  .commands-column,
+  .event-repl-column,
+  .event-log-column,
+  .session-repl-column,
+  .session-buttons-column {
+    flex: auto; /* Allow items to take full width */
+  }
+
+  /* Navbar adjustments for smaller screens */
+  .nav-container {
+    flex-direction: column; /* Stack brand and links */
+    align-items: flex-start; /* Align all to the left */
+    gap: 15px; /* Space between stacked elements */
+  }
+
+  .nav-brand {
+    margin-right: 0; /* Remove right margin */
+    width: 100%; /* Take full width */
+    text-align: center; /* Center the brand text */
+    justify-content: center;
+  }
+
+  #main-nav ul {
+    flex-direction: column; /* Stack links vertically */
+    width: 100%; /* Links take full width */
+    gap: 10px; /* Space between stacked links */
+    align-items: center; /* Center the links */
+  }
+
+  #main-nav ul li a {
+    padding: 5px 0; /* Add some vertical padding to clickable area */
+    display: block; /* Make the whole link clickable */
+    width: 100%; /* Make link fill width */
+    text-align: center; /* Center link text */
+  }
+
+  /* General padding for smaller screens */
+  main,
+  #main-nav .nav-container,
+  #main-footer .footer-content {
+    padding: 20px 15px; /* Adjust padding for smaller screens */
+  }
+
+  /* Adjust padding of sections on mobile if needed */
+  section {
+    padding: 20px 0; /* Reduce vertical padding on sections */
+  }
+}

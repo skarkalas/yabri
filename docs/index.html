@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="YaBRI is a powerful browser-based JavaScript REPL with support for API injection, event monitoring, and session persistence. Ideal for learning, testing, and integrating JS logic.">
+    <meta name="author" content="Sokratis Karkalas">
+    <meta name="keywords"
+        content="JavaScript, REPL, YaBRI, API injection, terminal, browser-based coding, web REPL, session persistence, interactive JS, event-driven REPL">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph for Facebook and others -->
+    <meta property="og:title" content="YaBRI - JavaScript REPL for API Injection & Events">
+    <meta property="og:description"
+        content="Powerful browser-based REPL with API injection, session persistence, and event monitoring.">
+    <meta property="og:image" content="https://yourdomain.github.io/img/og-image.png">
+    <meta property="og:url" content="https://yourusername.github.io/yabri">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="YaBRI - JavaScript REPL for Web Integration">
+    <meta name="twitter:description"
+        content="Run JavaScript in the browser with injected APIs, session persistence, and live events.">
+    <meta name="twitter:image" content="https://yourdomain.github.io/img/og-image.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap">
+    <link rel="stylesheet" href="css/fontawesome.css">
+    <link rel="stylesheet" href="css/solid.css">
+    <link rel="stylesheet" href="css/brands.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/uuid.js"></script>
+    <script src="js/marked.min.js"></script>
+    <script src="js/acorn.js"></script>
+    <script src="js/interpreter.js"></script>
+    <script src="js/serialize.js"></script>
+    <script src="js/jshint.js"></script>
+    <script src="dist/yabri.js" defer></script>
+    <script src="js/main.js" defer></script>
+    <title>YaBRI – Yet another Browser REPL Interface for API Injection, Events, and Persistence</title>
+</head>
+
+<body>
+
+    <nav id="main-nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <img src="../img/logo.png" alt="YaBRI Logo" class="nav-logo">
+                YaBRI
+            </div>
+            <ul>
+                <li><a href="#api-injection-demo">API Injection</a></li>
+                <li><a href="#event-listener-demo">Event Listener</a></li>
+                <li><a href="#session-persistence-demo">Session Persistence</a></li>
+                <li>
+                    <button id="repl-info-btn" class="nav-icon-btn" aria-label="Info">
+                        <i class="fa-solid fa-circle-info"></i>
+                    </button>
+                </li>
+                <li>
+                    <a href="https://github.com/your-username/your-repo" target="_blank" rel="noopener noreferrer"
+                        class="nav-icon-btn" aria-label="View GitHub Repository">
+                        <i class="fa-brands fa-github"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <section id="intro">
+        <h1>Welcome to YaBRI (Yet another Browser-based REPL Interface)</h1>
+        <p>
+            <strong>YaBRI</strong> is a lightweight, embeddable JavaScript REPL (Read-Eval-Print Loop) built with modern
+            web technologies.
+            Designed for developers, educators, and learners, it runs completely in the browser with no backend
+            requirements, providing
+            a safe, feature-rich, and highly customizable environment for live code execution, teaching, and
+            experimentation. Whether
+            you're building interactive tutorials, prototyping client-side logic, or enhancing developer tools, YaBRI
+            delivers a seamless
+            in-browser coding experience with deep integration capabilities and strong support for safety, usability,
+            and extensibility.
+        </p>
+        <p>
+            Press <kbd>Ctrl</kbd> + <kbd>I</kbd> while focused on any of the REPL terminals to access the documentation.
+            This reveals a
+            list of key combinations and features, helping you make the most out of YaBRI's functionality.
+        </p>
+        <p>
+            Below, you'll find three distinct instances of YaBRI, each configured to demonstrate specific capabilities
+            and features.
+            Feel free to experiment with them to explore what YaBRI can do.
+        </p>
+    </section>
+    <main>
+        <section id="api-injection-demo">
+            <h2>1. Interactive API Injection</h2>
+            <p>
+                One of YaBRI's powerful features is its ability to inject custom JavaScript APIs — of any depth —
+                directly into its execution environment.
+                This allows you to expose your application's logic or external libraries, making them accessible to
+                users within the REPL.
+            </p>
+            <h3>How to use the `app` object:</h3>
+            <p>
+                In the REPL below, we've injected a global object named <code>app</code>. Use the commands to the left
+                to
+                see it in action. These commands will execute in the REPL area.
+            </p>
+
+            <div class="commands-instructions-container">
+                <div class="commands-column">
+                    <h3>Suggested Commands</h3>
+                    <p>Click to execute in the REPL</p>
+                    <button class="command-btn"
+                        data-command="app.utils.capitalize('hello yabri-terminal')">app.utils.capitalize('hello
+                        yabri-terminal')</button>
+                    <button class="command-btn" data-command="app.data.getUsers()">app.data.getUsers()</button>
+                    <button class="command-btn"
+                        data-command="app.data.findUserById(1)">app.data.findUserById(1)</button>
+                    <button class="command-btn"
+                        data-command="app.utils.formatDate(2025, 5, 23)">app.utils.formatDate(2025, 5,
+                        23)</button>
+                    <button class="command-btn" data-command="app.config.version">app.config.version</button>
+                </div>
+                <div class="instructions-column">
+                    <h3>Define & Inject Custom API</h3>
+                    <p>Modify the JavaScript object below, then click <em>Inject API</em> to integrate it into the REPL
+                        environment. The REPL will clear upon injection. Evaluation occurs in your browser, so you may
+                        use any JavaScript features supported by it.</p>
+                    <button id="inject-api-btn">Inject API</button>
+                    <button id="remove-api-btn">Remove API</button>
+                    <div id="api-editor-message"></div>
+                </div>
+            </div>
+            <div class="repl-api-container">
+                <div class="repl-column">
+                    <yabri-terminal id="api-demo-repl" history-size="20" max-memory="1048576"
+                        max-steps="10000"></yabri-terminal>
+                </div>
+                <div class="api-editor-column">
+                    <textarea id="api-code-editor" rows="18" spellcheck="false"></textarea>
+                </div>
+            </div>
+        </section>
+
+        <hr style="margin: 50px 0;">
+
+        <section id="event-listener-demo">
+            <h2>2. Comprehensive Event Emission</h2>
+            <p>
+                YaBRI is designed with a rich event-driven architecture, emitting detailed custom events for virtually
+                every
+                user interaction and system action.
+                This allows your hosting application to monitor behavior, develop analytics, inform AI, and create
+                custom
+                workflows.
+            </p>
+
+            <div class="commands-instructions-container">
+                <div class="commands-column">
+                    <p>
+                        Interact with the REPL below (type code, press <code>Ctrl + Enter</code>, copy output, clear
+                        session, etc.),
+                        and watch the event
+                        log
+                        to see the detailed event data in real-time.
+                    </p>
+                </div>
+                <div class="instructions-column">
+                    <h3 style="text-align: center; vertical-align: bottom;">Live Event Log</h3>
+                </div>
+            </div>
+
+            <div class="event-display-container">
+                <div class="event-repl-column">
+                    <yabri-terminal id="event-demo-repl" history-size="20" max-memory="1048576"
+                        max-steps="20000"></yabri-terminal>
+                </div>
+                <div class="event-log-column">
+                    <textarea id="event-log-container" readonly></textarea>
+                </div>
+            </div>
+        </section>
+
+        <hr style="margin: 50px 0;">
+
+        <section id="session-persistence-demo">
+            <h2>3. Session Persistence</h2>
+            <p>
+                YaBRI allows users and developers/integrators to save and restore the entire REPL session, including
+                all input and output history. This is useful for preserving work,
+                sharing code snippets with context, or continuing a learning session later.
+            </p>
+            <p>
+                A <strong>session</strong> includes both your code and the output history. You can choose to save just
+                the code or the full session.
+            </p>
+            <p>
+                You can manually save a session using <code>Ctrl + D</code> (or <code>Cmd + D</code> on Mac), or upload
+                a session/code using <code>Ctrl + U</code> (or <code>Cmd + U</code> on Mac).
+                As a developer or integrator, you can also interact with the REPL programmatically via its API to
+                perform the same operations, as well as retrieve and set the session state directly — without requiring
+                manual download/upload.
+                Below, you can interact with the REPL, then try saving your current session or loading another one to
+                see how it works.
+            </p>
+
+            <div class="commands-instructions-container">
+                <div class="commands-column">
+                    <h3>Suggested Operations</h3>
+                    <p>Click to execute in the REPL</p>
+                    <button class="command-btn" id="save-session-btn">Save Session</button>
+                    <button class="command-btn" id="save-code-btn">Save Code</button>
+                    <button class="command-btn" id="load-session-btn">Load from File</button>
+                    <button class="command-btn" id="get-session-btn">Get Session to Editor</button>
+                    <button class="command-btn" id="set-session-btn">Set Session from Editor</button>
+                    <button class="command-btn" id="get-code-btn">Get Code to Editor</button>
+                    <button class="command-btn" id="set-code-btn">Set Code from Editor</button>
+                    <button class="command-btn" id="clear-session-btn">Clear Session</button>
+                </div>
+                <div class="instructions-column">
+                    <h3>Initialize or Reset the REPL Programmatically</h3>
+                    <p>
+                        Modify the JSON or JavaScript code below, then click <em>Set Session</em> or <em>Set Code</em>
+                        to insert it into the REPL.
+                    </p>
+                    <p>
+                        <strong>Note:</strong> Injecting a new session or code will reset the REPL.
+                    </p>
+                    <button id="reset-session-btn">Load Default Session</button>
+                    <div id="session-editor-message"></div>
+                </div>
+            </div>
+
+            <div class="session-display-container">
+                <div class="session-repl-column">
+                    <yabri-terminal id="session-demo-repl" history-size="20" max-memory="1048576"
+                        max-steps="30000"></yabri-terminal>
+                </div>
+                <div class="session-editor-column">
+                    <textarea id="session-code-editor" rows="18" spellcheck="false"></textarea>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer id="main-footer">
+        <div class="footer-content">
+            <p>&copy; 2025 YaBRI. All rights reserved.</p>
+            <p>Developed by Sokratis Karkalas with ❤️. Licensed under the <a id="license-link" href="../LICENSE.md"
+                    target="_blank" rel="noopener noreferrer">MIT License</a>.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

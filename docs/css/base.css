@@ -1,0 +1,23 @@
+/* ==========================================================================
+   Base Styles
+   ========================================================================== */
+
+*,
+::after,
+::before {
+  box-sizing: border-box;
+  font-size: 16px;
+  /* font-family: monospace, sans-serif; */
+  text-rendering: geometricprecision;
+  color: #ccc;
+}
+
+html {
+  -text-size-adjust: 100%;
+  -tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  text-align: left;
+}
