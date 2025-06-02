@@ -1,0 +1,10 @@
+yabri-terminal {
+  display: block;
+  width: 100%;
+  height: 600px;
+  border: 1px solid var(--repl-border-color);
+  border-radius: 5px;
+  box-sizing: border-box;
+  background-color: var(--repl-bg-color);
+  color: var(--repl-text-color);
+}

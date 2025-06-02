@@ -1,0 +1,227 @@
+#info-panel {
+  position: absolute; /* or 'relative' depending on context */
+  top: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 60vh;
+  width: 60vw;
+  max-height: 60vh; /* adjust as needed */
+  max-width: 60vw; /* adjust as needed */
+
+  /* Style from before */
+  background-color: #121212;
+  color: #e0e0e0;
+  font-family: "Segoe UI", sans-serif;
+  padding: 1.5rem;
+  border-radius: 10px;
+  line-height: 1.6;
+  /* width: 90%; or set a fixed width like 600px */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Backdrop - optional style if not inline */
+#info-modal-backdrop {
+  backdrop-filter: blur(4px);
+}
+
+#info-panel h2,
+#info-panel h3,
+#info-panel h4 {
+  margin-top: 1.5em;
+}
+
+#info-panel h1,
+#info-panel h2,
+#info-panel h3,
+#info-panel h4 {
+  color: #ffffff;
+  margin-bottom: 0.5em;
+}
+
+#info-panel h1 {
+  margin-top: 0;
+  border-bottom: 1px solid #333;
+}
+
+#info-panel h1 {
+  font-size: xx-large;
+}
+
+#info-panel p {
+  margin: 0.5em 0;
+}
+
+#info-panel a {
+  color: #80cbc4;
+  text-decoration: none;
+}
+
+#info-panel a:hover {
+  text-decoration: underline;
+}
+
+#info-panel code {
+  background-color: #1e1e1e;
+  color: #7FCBC4;
+  border-radius: 4px;
+  font-family: monospace;
+}
+
+#info-panel pre {
+  background-color: #1e1e1e;
+  color: #c3e88d;
+  padding: 1em;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+
+#info-panel blockquote {
+  border-left: 4px solid #555;
+  padding-left: 1em;
+  color: #aaa;
+  font-style: italic;
+  margin: 1em 0;
+}
+
+#info-panel ul,
+#info-panel ol {
+  margin-left: 1.5em;
+  margin-bottom: 1em;
+}
+
+#info-panel ul {
+  margin-bottom: 0.5em; /* Reduce the margin below the entire list */
+}
+
+#info-panel ul li {
+  margin-bottom: 0.2em; /* Reduce the margin below each list item */
+  padding-top: 0.2em;    /* Add a little top padding for visual separation if needed */
+  padding-bottom: 0.2em; /* Add a little bottom padding for visual separation if needed */
+  line-height: 1.3;      /* Adjust the line height of the text within the list items */
+  white-space: unset;
+}
+
+/* If you have nested lists and want to reduce their spacing even further */
+#info-panel ul ul {
+  margin-top: 0.2em;    /* Reduce the top margin for nested lists */
+  margin-bottom: 0.2em; /* Reduce the bottom margin for nested lists */
+}
+
+#info-panel ul ul li {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0.1em;
+  padding-bottom: 0.1em;
+  line-height: 1.2;
+}
+
+#info-panel ul ul ul li {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0.05em; /* Even smaller padding for deeper nesting if needed */
+  padding-bottom: 0.05em;
+  line-height: 1.1;
+}
+
+/* You might also want to adjust the paragraph spacing within list items if any */
+#info-panel ul li p {
+  margin-top: 0.3em;
+  margin-bottom: 0.3em;
+  line-height: inherit; /* Inherit the li's line-height */
+}
+
+#info-panel strong {
+  color: #ffffff;
+}
+
+#info-panel::-webkit-scrollbar {
+  width: 10px;
+}
+
+#info-panel::-webkit-scrollbar-track {
+  background: #1e1e1e;
+  border-radius: 5px;
+}
+
+#info-panel::-webkit-scrollbar-thumb {
+  background-color: #444;
+  border-radius: 5px;
+  border: 2px solid #1e1e1e; /* Adds padding effect */
+}
+
+#info-panel::-webkit-scrollbar-thumb:hover {
+  background-color: #666;
+}
+
+#info-panel {
+  scrollbar-color: #444 #1e1e1e; /* thumb color, track color */
+  scrollbar-width: thin;
+}
+
+/* Tab Buttons */
+.tab-buttons {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: unset;
+  gap: 8px;
+}
+
+.tab-buttons button {
+  background: #1f1f1f;
+  color: #ccc;
+  border: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+  font-size: 0.9rem;
+}
+
+.tab-buttons button.active,
+.tab-buttons button:hover {
+  background: #333;
+  color: #fff;
+}
+
+/* Tab Content */
+
+.tab-content {
+  position: absolute;
+  top: 5rem; /* adjust to be just below buttons */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 1rem;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  overflow-y: auto;
+  display: block; /* prevent collapse */
+  visibility: hidden;
+}
+
+.tab-content.active {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+  z-index: 1;
+}
+
+.tab-content.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Scrollbar */
+#info-panel::-webkit-scrollbar {
+  width: 8px;
+}
+
+#info-panel::-webkit-scrollbar-thumb {
+  background-color: #444;
+  border-radius: 4px;
+}
+
+#info-panel img {
+  width: 150px;
+}
